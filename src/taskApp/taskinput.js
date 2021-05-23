@@ -1,16 +1,26 @@
 import React, { Component } from "react";
 import $ from "jQuery";
+import { List, TaskList } from "./TaskList";
+import ReactDOM from "react-dom";
+
+const taskListVal = [];
 
 export class TaskInput extends Component {
   constructor(props) {
     super(props);
     this.addTask = this.addTask.bind(this);
     this.inputRef = React.createRef();
+    this.state = {
+      listVal: taskListVal
+    };
   }
   addTask() {
     const inputVal = $(this.inputRef.current).val();
     if (!!inputVal) {
-      alert("task added");
+      taskListVal.push(inputVal);
+      this.setState({
+        listVal: taskListVal
+      });
     } else {
       alert("text is empty");
     }
@@ -28,6 +38,8 @@ export class TaskInput extends Component {
         <button className="addTask" onClick={this.addTask}>
           Add todo
         </button>
+        (this.state.listVal) &&
+        <TaskList taskListVal={taskListVal} />
       </>
     );
   }
