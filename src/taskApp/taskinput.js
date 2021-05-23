@@ -1,24 +1,18 @@
 import React, { Component } from "react";
 import $ from "jQuery";
-import { TaskList } from "./TaskList";
-
-const taskListVal = [];
 
 export class TaskInput extends Component {
   constructor(props) {
     super(props);
+    this.collection = props.collection;
     this.addTask = this.addTask.bind(this);
     this.inputRef = React.createRef();
-    this.state = {
-      listVal: taskListVal
-    };
   }
   addTask() {
     const inputVal = $(this.inputRef.current).val();
     if (!!inputVal) {
-      taskListVal.push(inputVal);
-      this.setState({
-        listVal: taskListVal
+      this.collection.addModel({
+        name: inputVal
       });
     } else {
       alert("text is empty");
@@ -27,17 +21,16 @@ export class TaskInput extends Component {
   render() {
     return (
       <>
-        Add your todo
+        <span className="textSpan"> Add your todo </span>
         <input
           type="text"
           ref={this.inputRef}
-          className="inputTask"
+          className="inputBox"
           placeholder="Add your task"
         />
         <button className="addTask" onClick={this.addTask}>
           Add todo
         </button>
-        {this.state.listVal && <TaskList taskListVal={taskListVal} />}
       </>
     );
   }

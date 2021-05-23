@@ -1,13 +1,19 @@
-// import { Model } from "backbone.model";
+import { Model, Collection } from "backbone.model";
 
-var taskModel = [];
+const TaskModel = Model.extend({
+  defaults() {}
+});
+const TaskCollection = Collection.extend({
+  model: TaskModel,
+  addModel(model) {
+    this.add(model);
+    window.console.log(this);
+    this.trigger("add:task");
+  }
+});
 
-const getModel = function (id) {
-  return taskModel[id];
+const fetchAllModel = (collection) => {
+  return collection.toJSON();
 };
 
-const setModel = function (id, name) {
-  taskModel.push(id, name);
-};
-
-export { getModel, setModel };
+export { TaskCollection, TaskModel, fetchAllModel };
