@@ -3,7 +3,7 @@ import { fetchAllModel } from "./model";
 import isEmpty from "lodash/isEmpty";
 class List extends Component {
   render() {
-    return <li>{this.props.name}</li>;
+    return <div>{this.props.name}</div>;
   }
 }
 
@@ -40,7 +40,7 @@ class TaskList extends Component {
     this.collection.off("add:task", this.addNewTask);
   }
   render() {
-    return !isEmpty(this.state.newTask) && <ol>{this.getList()}</ol>;
+    return !isEmpty(this.state.newTask) && <div>{this.getList()}</div>;
   }
 }
 
