@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import $ from "jQuery";
-import { List, TaskList } from "./TaskList";
-import ReactDOM from "react-dom";
+import { TaskList } from "./TaskList";
 
 const taskListVal = [];
 
@@ -38,8 +37,7 @@ export class TaskInput extends Component {
         <button className="addTask" onClick={this.addTask}>
           Add todo
         </button>
-        (this.state.listVal) &&
-        <TaskList taskListVal={taskListVal} />
+        {this.state.listVal && <TaskList taskListVal={taskListVal} />}
       </>
     );
   }
